@@ -1,6 +1,6 @@
 /static
 /migrations
-.pyc
+*.pyc
 
 settings.py
 
