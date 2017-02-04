@@ -55,3 +55,9 @@ def main_page(request):
 
 
 	return render(request, 'kbbi/main_page.html')
+
+
+def search_api(request):
+	
+
+	return HttpResponse("API Ok")
