@@ -1,0 +1,202 @@
+
+{% load static admin_static material_admin i18n %}<!DOCTYPE html>
+{% get_current_language as LANGUAGE_CODE %}
+<html lang="{{ LANGUAGE_CODE|default:"en-us" }}">
+    <head>
+        {% block head %}
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/>
+        {% block favicon %}<link href="{% static 'img/flag.png' %}" rel="shortcut icon">{% endblock %}
+        <title>Kamus Besar Bahasa Indonesia{% block title %}{% endblock %}</title>
+        {% block css %}
+        {% include 'admin/includes/material_css.html' %}
+        <style type="text/css">
+			.page-flexbox-wrapper {
+			  display: flex
+			  min-height: 100vh
+			  flex-direction: column
+			}
+		main {
+		  flex: 1 1 auto 
+
+		  }
+		footer{
+		 	margin-left: 0px !important; 
+
+		}
+
+		.row {
+			margin-bottom: 5px !important; 
+		}      
+        </style>
+        {% block extrastyle %}{% endblock %}
+        {% endblock css %}
+        {% block blockbots %}<meta name="robots" content="NONE,NOARCHIVE" />{% endblock %}
+        {% block js %}
+        <script src="{% static 'material/js/jquery-2.2.0.js' %}"></script>
+        <script src="{% static 'js/fontawesome.js' %}"></script>
+        <script>
+            // Use same django for material and django admin
+            var django = django || {};
+            django.jQuery = jQuery.noConflict(true);
+            window.jQuery = window.$ = django.jQuery
+        </script>
+        {{ media.js }}
+        {% endblock js %}
+        {% block extrahead %}{% endblock %}
+        {% endblock head %}
+</head>
+<body>
+  <div class="page-flexbox-wrapper">
+  <nav>
+    <div class="nav-wrapper">
+      <a href="/" class="brand-logo">Kamus Besar Bahasa Indonesia</a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <li><a href="#">API</a></li>
+        <li><a href="#">Dokumentasi</a></li>
+        <li><a href="#">Login</a></li>
+      </ul>
+    </div>
+  </nav>
+
+<div class="container">
+	<div class="container center">
+		<div class="row" style="height:20px">
+		</div>
+	</div>
+	<div class="row">
+		<div class="row">
+		<div class="col s12">&nbsp;</div>
+		</div>
+	  <div class="row">
+	    <div class="col s12 m2 l2">&nbsp;</div>
+	    <form method="GET" action="?">
+	    <div class="col s12 m8 l8">
+		    <div class="col s12">
+		      <div class="row">
+		        <div class="input-field col s12">
+		          <i class="material-icons prefix">search</i>
+		          <input type="text" id="autocomplete-input" class="autocomplete" name="katakunci">
+		          <label for="autocomplete-input">Cari Kata dalam Kamus</label>
+
+  		          <button class="btn waves-effect waves-light right" type="submit">Cari
+				  </button>
+
+		        </div>
+		      </div>
+		    </div>
+		  </div>
+		 </form>
+	    <div class="col s12 m2 l2">&nbsp;</div>
+	  </div>
+
+		<div class="row">
+		<div class="col s12">&nbsp;</div>
+		</div>
+
+	</div>
+</div>
+
+{% if hasil_search %}
+<div class="container justify">
+	<div class="row">
+		<div class="row">
+		<div class="col s12">&nbsp;</div>
+		</div>
+	  <div class="row">
+	    <div class="col s12 m2 l2">&nbsp;</div>
+	    <div class="col s12 m8 l8">
+		    <div class="col s12">
+	          <div class="card blue-grey darken-1">
+	            <div class="card-content white-text">
+	              <span class="card-title">Hasil Pencarian : <i>{{ katakunci }}</i></span>
+	              </br><small class="orange-text darken-4">{{ hasil_search.paginator.count }} data ditemukan</small>
+	              {% for p in hasil_search %}
+	              <p>{{ p.escape_artikata|safe }}</p>
+	              <div class="divider"></div></br>
+	              {% endfor %}
+	            </div>
+	            <span>&nbsp;</span>
+	          </div>
+		    </div>
+		  </div>
+	    <div class="col s12 m2 l2">&nbsp;</div>
+	  </div>
+
+		<div class="row">
+		<div class="col s12">&nbsp;</div>
+		</div>
+
+	</div>
+</div>
+{% else %}
+<div class="container center">
+	<div class="row" style="height:220px">
+	{{ kosong|safe }}
+	</div>
+</div>
+{% endif %}
+
+{% if hasil_search.paginator %}
+<div class="container center">
+	<div class="row">
+	    <div class="col s12">
+	        <ul class="pagination" style="height:50px;margin-top:40px">
+	        {% if hasil_search.has_previous %}
+	            <a href="?page={{ hasil_search.previous_page_number }}{% if katakunci %}&katakunci={{ katakunci }}{% endif %}"><i class="material-icons">chevron_left</i></a>
+	        {% endif %}
+
+			{% for i in page_range %}
+			{% if hasil_search.number == i %}
+			<li class="active"><a href="#!">{{ i }}</a></li>
+			{% else %}
+			<li><a href="?page={{ i }}{% if katakunci %}&katakunci={{ katakunci }}{% endif %}">{{ i }}</a></li>
+			{% endif %}
+			{% endfor %}
+
+
+	        {% if hasil_search.has_next %}
+	            <a href="?page={{ hasil_search.next_page_number }}{% if katakunci %}&katakunci={{ katakunci }}{% endif %}"><i class="material-icons">chevron_right</i></a>
+	        {% endif %}
+	        </ul>
+	    </div>
+	</div>
+</div>
+{% endif %}
+
+
+     {% include 'admin/includes/material_js.html' %}
+        {% block extrajs %}
+        {% endblock %}
+
+        <footer class="page-footer">
+          <div class="container">
+            <div class="row">
+              <div class="col l6 s12">
+                <h5 class="white-text">Term Of Service</h5>
+                <p class="grey-text text-lighten-4">
+                KBBI Online ini dikembangkan oleh Fendi Dwi Fauzi secara Opensource dari <a class="red-text text-ancent-3" href="https://github.com/bgli/kbbi-qt"> KBBI-QT</a>.
+				Database utama merupakan Hak Cipta Badan Pengembangan dan Pembinaan Bahasa, Kemdikbud (Pusat Bahasa).</p>
+              </div>
+              <div class="col l4 offset-l2 s12">
+                <h5 class="white-text">Contact Me</h5>
+                <ul>
+                  <li><a class="grey-text text-lighten-4" href="https://github.com/efenfauzi"><i class="fa fa-github fa-2x"></i> Github</a></li>
+                  <li><a class="blue-text text-darken-1" href="https://www.facebook.com/efenfauzi"><i class="fa fa-facebook-official fa-2x"></i> Facebook</a></li>
+                  <li><a class="orange-text text-lighten-3" href="mailto:efen.fauzi@gmail.com"><i class="fa fa-envelope fa-2x"></i> Email</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="footer-copyright">
+            <div class="container center">
+            re-write in django python by @efenfauzi © 2017 
+            </div>
+          </div>
+        </div>
+    	</footer>
+
+    </body>
+
+</html>
