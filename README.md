@@ -22,9 +22,9 @@ untuk berkontribusi,silahkan clone dan push buat branch baru, semisal dev, devel
 4. mkvirtualenv "nama_venv" 
 5. source "nama_venv"
 6. pip install -r requirements.txt
-7. cp settings.py.example --> settings.py , sesuaikan dengan settingan server
-8. ./manage.py migrate --database=default (migrate database untuk django)
-9. ./manage.py migrate --database=kbbi --fake (database kbbi sdh tersedia)
+7. cp django_kbbi/settings.py.example --> django_kbbi/settings.py , sesuaikan dengan settingan server
+8. ./manage.py migrate (migrate database untuk django)
+9. ./manage.py makemigrations kbbi , lalu  ./manage.py migrate kbbi --fake (database kbbi sdh tersedia)
 10. ./manage.py collectstatic, yes
 11. ./manage.py runserver "port"
 12. open browser
