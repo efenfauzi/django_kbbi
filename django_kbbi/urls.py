@@ -19,5 +19,5 @@ from kbbi import views as kbbi
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', kbbi.main_page, name='main_index'),
-    url(r'^/api/v1/$', kbbi.search_api, name='search_api'),
+    url(r'^api/v1/$', kbbi.search_api, name='search_api'),
 ]
