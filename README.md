@@ -8,20 +8,30 @@ Django KBBI adalah Kamus Besar Bahasa Indonesia yang ditulis ulang(recode) mengg
 4. Offline mode , aplikasi dapat digunakan mode offline. Secara periodik database terupdate melalui service API.
 
 # Opensource dan Pengembangan
-Project yang dikembangkan adalah opensource lanjutan dari kontribusi pembuatan kamus bahasa indonesia. Beberapa yang exist diantaranya adalah :
+Project yang dikembangkan adalah opensource lanjutan dari forum pembuatan kamus bahasa indonesia. Beberapa yang exist diantaranya adalah :
 - http://kbbi.web.id/ by ebta setiawan (ebsoft)
 - https://github.com/bgli/kbbi-qt (C++ and QT interface)
 
-# Install
-1. mkvirtualenv "nama_venv" 
-2. source "nama_venv"
-3. pip install -r requirements.txt
-4. cp settings.py.example --> settings.py , sesuaikan dengan settingan server
-5. ./manage.py migrate --database=default (migrate database untuk django)
-6. ./manage.py migrate --database=kbbi --fake (database kbbi sdh tersedia)
-7. ./manage.py collectstatic, yes
-8. ./manage.py runserver "port"
-9. open browser
+untuk berkontribusi,silahkan clone dan push buat branch baru, semisal dev, development.. dll...
 
+# Install
+```bash
+1. clone atau download project git@github.com:efenfauzi/django_kbbi.git
+2. cd "django_kbbi"
+3. git checkout master
+4. mkvirtualenv "nama_venv" 
+5. source "nama_venv"
+6. pip install -r requirements.txt
+7. cp settings.py.example --> settings.py , sesuaikan dengan settingan server
+8. ./manage.py migrate --database=default (migrate database untuk django)
+9. ./manage.py migrate --database=kbbi --fake (database kbbi sdh tersedia)
+10. ./manage.py collectstatic, yes
+11. ./manage.py runserver "port"
+12. open browser
+```
 # ScreenShot
+![Index](https://github.com/efenfauzi/django_kbbi/blob/master/screenshot/index.png)
+![Pencarian Ketemu](https://github.com/efenfauzi/django_kbbi/blob/master/screenshot/pencarian_ketemu.png)
+![Pencarian Tidak Ketemu](https://github.com/efenfauzi/django_kbbi/blob/master/screenshot/pencarian_tidak_ketemu.png)
+
 
