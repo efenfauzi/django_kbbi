@@ -16,8 +16,16 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 from kbbi import views as kbbi
+from django.conf.urls import handler403, handler404, handler500
+
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', kbbi.main_page, name='main_index'),
     url(r'^api/v1/$', kbbi.search_api, name='search_api'),
+    url(r'^404', kbbi.not_found, name='not_found'),
+    url(r'^500', kbbi.server_error, name='server_error'),
 ]
+
+handler404 = 'kbbi.views.not_found'
+handler500 = 'kbbi.views.server_error'
+handler403 = 'kbbi.views.server_error'

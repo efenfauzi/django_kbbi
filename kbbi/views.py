@@ -61,3 +61,12 @@ def search_api(request):
 	
 
 	return HttpResponse("API Ok")
+
+
+def not_found(request):
+
+	return render(request, 'kbbi/404.html')
+
+def server_error(request):
+
+	return render(request, 'kbbi/500.html')
