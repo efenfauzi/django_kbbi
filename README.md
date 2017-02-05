@@ -38,8 +38,7 @@ untuk berkontribusi,silahkan clone dan push buat branch baru, semisal dev, devel
 # Demo on Heroku 
 http://kbbi.herokuapp.com/
 
-# DockerHub
-_(docker already installed)_
+# DockerHub _(docker already installed)_
 1. sudo docker run -p 6565:6565 -it efenfauzi/django-kbbi 
 2. buka browser, localhost:6565 
 3. Done :-) 
