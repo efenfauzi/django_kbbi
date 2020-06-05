@@ -1,4 +1,4 @@
-Django==1.10.4
+Django==1.11.29
 django-material==0.12.3
 gunicorn
 whitenoise==3.2
